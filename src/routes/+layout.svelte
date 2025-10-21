@@ -2,7 +2,7 @@
   import { user, logout } from "$store/user.js";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
-
+  import "../app.css";
   let currentUser;
 
   $: currentUser = $user;
