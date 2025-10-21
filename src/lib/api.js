@@ -1,4 +1,5 @@
 // src/lib/api.js
+import { browser } from "$app/environment";
 import { get } from "svelte/store";
 import { user } from "../store/user.js";
 
@@ -19,7 +20,7 @@ export async function apiFetch(endpoint, options = {}) {
   });
 
   if (res.status === 401) {
-    // Token scaduto o invalido → logout
+    // Token expired or invalid → logout
     localStorage.removeItem("user");
     window.location.href = "/login";
     return;
@@ -31,4 +32,22 @@ export async function apiFetch(endpoint, options = {}) {
   }
 
   return res.json();
+}
+
+// ✅ DELETE helper
+export async function deleteList(id) {
+  return apiFetch(`/lists/${id}`, { method: "DELETE" });
+}
+
+// ✅ GET single list (for detail view)
+export async function getListById(id) {
+  return apiFetch(`/lists/${id}`);
+}
+
+// ✅ POST new item
+export async function addItemToList(listId, itemData) {
+  return apiFetch(`/lists/${listId}/items`, {
+    method: "POST",
+    body: JSON.stringify(itemData),
+  });
 }
