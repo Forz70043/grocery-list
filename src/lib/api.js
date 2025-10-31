@@ -1,10 +1,11 @@
 // src/lib/api.js
-import { browser } from "$app/environment";
+//import { browser } from "$app/environment";
 import { get } from "svelte/store";
 import { user } from "../store/user.js";
 
 const API_URL = "http://localhost:5001/api";
 
+// Generic API fetch helper
 export async function apiFetch(endpoint, options = {}) {
   const token = get(user)?.token;
 
@@ -49,5 +50,13 @@ export async function addItemToList(listId, itemData) {
   return apiFetch(`/lists/${listId}/items`, {
     method: "POST",
     body: JSON.stringify(itemData),
+  });
+}
+
+// ✅ DELETE item
+export async function deleteItem(id) {
+  return apiFetch(`/items/${id}`, {
+    method: "DELETE",
+    body: JSON.stringify({ id }),
   });
 }

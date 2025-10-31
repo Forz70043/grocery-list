@@ -40,12 +40,24 @@ async function handleAddItem() {
         list.items = [...(list.items || []), newItem];
         newItemName = "";
         newItemQuantity = "";
-        success = "✅ Item added successfully!";   // ✅ mostra messaggio
-        setTimeout(() => (success = ""), 2000);    // sparisce dopo 2s
+        success = "✅ Item added successfully!";
+        // hide after 2s
+        setTimeout(() => (success = ""), 2000);
     } catch (e) {
         alert("Error adding item: " + e.message);
     }
 }
+
+async function handleDelete(id) {
+    if (confirm("Are you sure you want to delete this item?")) {
+      try {
+        await deleteItem(id);
+        list.items = list.items.filter(item => item.id !== id);
+      } catch (e) {
+        alert("Error deleting item: " + e.message);
+      }
+    }
+  }
 
 function goBack() {
     goto("/");
@@ -68,9 +80,11 @@ function goBack() {
         {#if list.items?.length > 0}
         <ul class="space-y-3 mb-8">
             {#each list.items as item}
-            <li class="p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
-                <p class="font-medium">{item.name}</p>
-                <p class="text-sm text-gray-400">Qty: {item.quantity}</p>
+            <li class="flex justify-between items-center bg-gray-800 text-white px-4 py-2 rounded-lg shadow">
+                <span>{item.name}</span>
+                <button class="text-red-400 hover:text-red-600 transition" on:click={() => handleDelete(item.id)}>
+                    🗑️
+                </button>
             </li>
             {/each}
         </ul>
