@@ -2,6 +2,7 @@
 import { user } from "../store/user.js";
 import { apiFetch } from "./api.js";
 
+// Login function
 export async function login(email, password) {
   const res = await apiFetch("/auth/signin", {
     method: "POST",
@@ -18,13 +19,15 @@ export async function login(email, password) {
   return res;
 }
 
-export async function register(email, password) {
+// Registration function
+export async function registerUser(name, username, email, password) {
   return apiFetch("/auth/signup", {
     method: "POST",
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ name, username, email, password }),
   });
 }
 
+// Logout function
 export function logout() {
   user.set(null);
   localStorage.removeItem("user");
