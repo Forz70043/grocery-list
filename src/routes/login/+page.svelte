@@ -47,5 +47,9 @@
         Login
       </button>
     </form>
+    <p class="mt-6 text-center text-gray-400 text-sm">
+      Don’t have an account?
+      <a href="/register" class="text-emerald-400 hover:underline">Sign up</a>
+    </p>
   </div>
 </div>
