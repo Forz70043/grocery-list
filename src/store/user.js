@@ -13,7 +13,12 @@ if (browser) {
     }
   });
 }
-
+// Logout function
 export function logout() {
   user.set(null);
 }
+
+// set user function
+export const setUser = (data) => {
+  user.set(data);
+};
