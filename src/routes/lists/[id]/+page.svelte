@@ -1,7 +1,7 @@
 <script>
 import { page } from "$app/stores";
 import { goto } from "$app/navigation";
-import { getListById, addItemToList } from "$lib/api.js";
+import { getListById, addItemToList, deleteItem } from "$lib/api.js";
 import { onMount } from "svelte";
 
 let list = null;
