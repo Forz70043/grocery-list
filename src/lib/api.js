@@ -1,9 +1,10 @@
 // src/lib/api.js
 //import { browser } from "$app/environment";
+import { PUBLIC_API_BASE_URL } from '$env/static/public';
 import { get } from "svelte/store";
 import { user } from "../store/user.js";
 
-const API_URL = "http://localhost:5001/api";
+const API_URL = PUBLIC_API_BASE_URL;
 
 // Generic API fetch helper
 export async function apiFetch(endpoint, options = {}) {
